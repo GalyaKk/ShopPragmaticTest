@@ -17,10 +17,8 @@ public class CatalogCategoriesPageTest extends BaseTest{
     @Test
     public void addAndDeleteCategoryTest() {
         loginPageTest.loginAsAdmin();
-        WaitTool.waitUntilVisibleElement(LeftNavigationBar.CATALOG_MENU);
         WaitTool.waitUntilElementIsClickable(LeftNavigationBar.CATALOG_MENU);
         LeftNavigationBar.clickOnWebElement(LeftNavigationBar.CATALOG_MENU);
-        WaitTool.waitUntilVisibleElement(LeftNavigationBar.CATALOG_MENU_CATEGORIES);
         WaitTool.waitUntilElementIsClickable(LeftNavigationBar.CATALOG_MENU_CATEGORIES);
         LeftNavigationBar.clickOnWebElement(LeftNavigationBar.CATALOG_MENU_CATEGORIES);
         CatalogCategoriesPage.clickOnWebElement(CatalogCategoriesPage.ADD_CATEGORY_BUTTON);
