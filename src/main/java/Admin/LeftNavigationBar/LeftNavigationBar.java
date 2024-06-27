@@ -6,8 +6,8 @@ import org.openqa.selenium.By;
 public class LeftNavigationBar extends BasePage {
 
     protected static final By DASHBOARD_MENU = By.cssSelector("#menu-dashboard>a");
-    public static final By CATALOG_MENU = By.cssSelector("#menu-catalog>a");
-    public static final By CATALOG_MENU_CATEGORIES = By.xpath("//*[@id='menu-catalog']/ul/li[1]/a");
+    private static final By CATALOG_MENU = By.cssSelector("#menu-catalog>a");
+    private static final By CATALOG_MENU_CATEGORIES = By.xpath("//*[@id='menu-catalog']/ul/li[1]/a");
     protected static final By CATALOG_MENU_PRODUCTS = By.xpath("//*[@id='menu-catalog']/ul/li[2]/a");
     protected static final By CATALOG_MENU_RECURRING_PROFILES = By.xpath("//*[@id='menu-catalog']/ul/li[3]/a");
     protected static final By CATALOG_MENU_FILTERS = By.xpath("//*[@id='menu-catalog']/ul/li[4]/a");
@@ -53,6 +53,21 @@ public class LeftNavigationBar extends BasePage {
     protected static final By REPORT_MENU_REPORTS = By.xpath("//*[@id='menu-report']/ul/li[1]/a");
     protected static final By REPORT_MENU_WHO_ONLINE = By.xpath("//*[@id='menu-report']/ul/li[2]/a");
     protected static final By REPORT_MENU_STATISTICS = By.xpath("//*[@id='menu-report']/ul/li[3]/a");
+
+    public static By getCatalogMenu() {
+        return CATALOG_MENU;
+    }
+
+    public static By getCatalogMenuCategories(){
+        return CATALOG_MENU_CATEGORIES;
+    }
+
+    public static void clickOnCatalogMenu(){
+        LeftNavigationBar.clickOnWebElement(CATALOG_MENU);
+    }
+    public static void clickOnCatalogMenuCategories(){
+        LeftNavigationBar.clickOnWebElement(CATALOG_MENU_CATEGORIES);
+    }
 
 
 

@@ -26,15 +26,23 @@ public class LoginPage extends BasePage {
         driver.get(LOGIN_PAGE_URL);
     }
 
-    public static void typeIntoUsernameField (String username) {
+    public static void typeIntoUsernameField () {
         BasePage.writeTextInWebelemnt(USERNAME_INPUT_FIELD, "admin");
     }
-    public static void typeIntoPasswordField (String password) {
+    public static void typeIntoPasswordField () {
         BasePage.writeTextInWebelemnt(PASSWORD_INPUT_FIELD, "parola123!");
     }
 
-    public static String inputWindowTitle (){
+    public static String getInputWindowTitle (){
         return LoginPage.getTextFromElement(TITLE_INPUT_WINDOW);
+    }
+
+    public static void clickOnForgottenPasswordLink(){
+        LoginPage.clickOnWebElement(FORGOTTEN_PASS_LINK);
+    }
+
+    public static void clickOnLoginButton(){
+        LoginPage.clickOnWebElement(LOGIN_BUTTON);
     }
 
 
