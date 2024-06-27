@@ -11,9 +11,9 @@ public class ForgottenPasswordPage extends BasePage {
     private static final By RESET_PASSWORD_BUTTON = By.cssSelector("div.text-right>button");
     private static final By NO_EMAIL_WARNING_MESSAGE = By.cssSelector(".alert");
 
-    public static By getTitleForgottenPass(){
-        return TITLE_FORGOTTEN_PASS;
-    }
+//    public static By getTitleForgottenPass(){
+//        return TITLE_FORGOTTEN_PASS;
+//    }
     public static By getCancelButton(){
         return CANCEL_BUTTON;
     }
@@ -25,7 +25,7 @@ public class ForgottenPasswordPage extends BasePage {
     }
 
 
-    public static void cancelTheForget() {
+    public static void clickOnCancelTheForgetButton() {
         ForgottenPasswordPage.clickOnWebElement(ForgottenPasswordPage.CANCEL_BUTTON);
     }
 
@@ -33,8 +33,12 @@ public class ForgottenPasswordPage extends BasePage {
         return ForgottenPasswordPage.getTextFromElement(NO_EMAIL_WARNING_MESSAGE).substring(0, 75);
     }
 
-    public static String titleForgottenPass(){
+    public static String getTitleForgottenPass(){
         return ForgottenPasswordPage.getTextFromElement(TITLE_FORGOTTEN_PASS);
+    }
+
+    public static void clickOnResetPassButton() {
+        ForgottenPasswordPage.clickOnWebElement(RESET_PASSWORD_BUTTON);
     }
 
 }

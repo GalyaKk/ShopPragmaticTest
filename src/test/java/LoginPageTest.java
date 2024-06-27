@@ -9,18 +9,18 @@ public class LoginPageTest extends BaseTest{
     @Test
     public void loginAsAdmin() {
         LoginPage.openLoginPage();
-        Assert.assertEquals(LoginPage.inputWindowTitle(), "Please enter your login details.");
-        LoginPage.typeIntoUsernameField("admin");
-        LoginPage.typeIntoPasswordField("parola123!");
-        LoginPage.clickOnWebElement(LoginPage.getLoginButton());
+        Assert.assertEquals(LoginPage.getInputWindowTitle(), "Please enter your login details.");
+        LoginPage.typeIntoUsernameField();
+        LoginPage.typeIntoPasswordField();
+        LoginPage.clickOnLoginButton();
         Assert.assertEquals(DashboardPage.getHeaderText(), "Dashboard");
     }
 
     @Test
     public void forgottenPassword() {
         LoginPage.openLoginPage();
-        LoginPage.clickOnWebElement(LoginPage.getForgottenPassLink());
-        Assert.assertEquals(ForgottenPasswordPage.titleForgottenPass(), "Forgot Your Password?");
+        LoginPage.clickOnForgottenPasswordLink();
+        Assert.assertEquals(ForgottenPasswordPage.getTitleForgottenPass(), "Forgot Your Password?");
     }
 
 

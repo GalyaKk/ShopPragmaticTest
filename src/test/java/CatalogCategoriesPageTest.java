@@ -4,9 +4,15 @@ import Utils.Action;
 import Utils.Browser;
 import Utils.WaitTool;
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.NoSuchElementException;
 
 //import java.lang.invoke.LambdaForm$Holder;
 
@@ -18,19 +24,19 @@ public class CatalogCategoriesPageTest extends BaseTest{
     public void addCategoryTest() {
         loginPageTest.loginAsAdmin();
         CatalogCategoriesPage.afterLoginGoToCatalogCategoriesPage();
-        CatalogCategoriesPage.clickOnWebElement(CatalogCategoriesPage.ADD_CATEGORY_BUTTON);
-        CatalogCategoriesPage.writeTextInWebelemnt(CatalogCategoriesPage.CATEGORY_NAME_INPUT_FIELD, CatalogCategoriesPage.newCategoryName);
-        Action.scrollToMyElement(CatalogCategoriesPage.META_TAG_TITLE_INPUT_FIELD);
-        CatalogCategoriesPage.writeTextInWebelemnt(CatalogCategoriesPage.META_TAG_TITLE_INPUT_FIELD, "newly added category");
-        CatalogCategoriesPage.clickOnWebElement(CatalogCategoriesPage.SAVE_ADDED_CATEGORY_BUTTON);
+        CatalogCategoriesPage.clickOnAddCategoryButton();
+        CatalogCategoriesPage.writeTextInCategoryNameField();
+        CatalogCategoriesPage.scrollToMetaTagTitle();
+        CatalogCategoriesPage.writeTextInCategoryMetaTagField();
+        CatalogCategoriesPage.clickOnSaveNewCategoryButton();
         Assert.assertEquals(CatalogCategoriesPage.getTextFromSuccessMessage(), "Success: You have modified categories!");
     }
     @Test
     public void deleteCategoryTest(){
         loginPageTest.loginAsAdmin();
         CatalogCategoriesPage.afterLoginGoToCatalogCategoriesPage();
-        CatalogCategoriesPage.clickOnWebElement(CatalogCategoriesPage.CATEGORY_TYPE);
-        CatalogCategoriesPage.clickOnWebElement(CatalogCategoriesPage.DELETE_BUTTON);
+        CatalogCategoriesPage.clickOnTestCategoryType();
+        CatalogCategoriesPage.clickOnDeleteButton();
         try{
             Alert alert = Browser.getDriver().switchTo().alert();
             alert.accept();
@@ -39,4 +45,5 @@ public class CatalogCategoriesPageTest extends BaseTest{
         }
         Assert.assertEquals(CatalogCategoriesPage.getTextFromSuccessMessage(), "Success: You have modified categories!");
     }
+
 }
