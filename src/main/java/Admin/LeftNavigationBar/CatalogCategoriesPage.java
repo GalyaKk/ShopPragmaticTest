@@ -1,6 +1,7 @@
 package Admin.LeftNavigationBar;
 
 import Base.BasePage;
+import Utils.WaitTool;
 import org.openqa.selenium.By;
 
 public class CatalogCategoriesPage extends BasePage {
@@ -16,7 +17,15 @@ public class CatalogCategoriesPage extends BasePage {
 
 
     public static String getTextFromSuccessMessage(){
+        WaitTool.waitUntilVisibleElement(CatalogCategoriesPage.SUCCESS_MESSAGE);
         return CatalogCategoriesPage.getTextFromElement(CatalogCategoriesPage.SUCCESS_MESSAGE).substring(0, 38);
+    }
+
+    public static void afterLoginGoToCatalogCategoriesPage(){
+        WaitTool.waitUntilElementIsClickable(LeftNavigationBar.CATALOG_MENU);
+        LeftNavigationBar.clickOnWebElement(LeftNavigationBar.CATALOG_MENU);
+        WaitTool.waitUntilElementIsClickable(LeftNavigationBar.CATALOG_MENU_CATEGORIES);
+        LeftNavigationBar.clickOnWebElement(LeftNavigationBar.CATALOG_MENU_CATEGORIES);
     }
 
 }
