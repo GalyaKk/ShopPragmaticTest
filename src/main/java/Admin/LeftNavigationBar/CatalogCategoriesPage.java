@@ -2,8 +2,13 @@ package Admin.LeftNavigationBar;
 
 import Base.BasePage;
 import Utils.Action;
+import Utils.Browser;
 import Utils.WaitTool;
 import org.openqa.selenium.By;
+import org.openqa.selenium.interactions.Actions;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CatalogCategoriesPage extends BasePage {
 
@@ -18,6 +23,8 @@ public class CatalogCategoriesPage extends BasePage {
     private static final By SAVE_ADDED_CATEGORY_BUTTON = By.cssSelector("div.container-fluid>div.pull-right>button");
     private static final By CATEGORY_NAME_BUTTON = By.cssSelector(".asc");
     private static final By CATEGORY_NAME_TEXT = By.xpath("//tbody/tr[" +i+ "]/td[@class='text-left']");
+    public static final By CATEGORY_LIST_NEXT_PAGE_NUMBER = By.xpath("//div[@class='row']//li[@class='active']/following-sibling::li[1]/a");
+    public static final By CATEGORY_LIST_FIRST_PAGE = By.xpath("//ul[@class='pagination']//a[text()=\"1\"]");
 
 
 
@@ -63,5 +70,40 @@ public class CatalogCategoriesPage extends BasePage {
     public static void clickOnCategoryNameButton(){
         CatalogCategoriesPage.clickOnWebElement(CATEGORY_NAME_BUTTON);
     }
+    public static void clickOnNextCategoryPage(){
+        CatalogCategoriesPage.clickOnWebElement(CATEGORY_LIST_NEXT_PAGE_NUMBER);
+    }
+    public static void moveToNextCategoryPage(By by){
+        Action.moveToMyElement(by);
+    }
 
+    public static By getCategoryListNextPageNumber(){
+        return CATEGORY_LIST_NEXT_PAGE_NUMBER;
+    }
+
+    public static List<String> addAllCategoriesToList(){
+        List<String> categoriesList = new ArrayList<>();
+        while (true){
+            for (int i=1; true; i++){
+                try {
+                    categoriesList.add(CatalogCategoriesPage.getTextFromElement(By.xpath("//tbody/tr[" +i+ "]/td[@class='text-left']")).toUpperCase());
+                } catch (Exception e) {
+                    break;
+                }
+            }
+            try {
+                Actions actions = new Actions(Browser.getDriver());
+                actions.moveToElement(Browser.getDriver().findElement(CatalogCategoriesPage.getCategoryListNextPageNumber()));
+//       CatalogCategoriesPage.moveToNextCategoryPage(CatalogCategoriesPage.CATEGORY_LIST_NEXT_PAGE_NUMBER);
+                WaitTool.waitUntilElementIsClickable(By.xpath("//div[@class='row']//li[@class='active']/following-sibling::li[1]/a"));
+                CatalogCategoriesPage.clickOnNextCategoryPage();
+            } catch (Exception noNextPage){
+                break;
+            }
+        }
+        return categoriesList;
+    }
+    public static void clickOnFirstPageOfCategories(){
+        CatalogCategoriesPage.clickOnWebElement(CATEGORY_LIST_FIRST_PAGE);
+    }
 }

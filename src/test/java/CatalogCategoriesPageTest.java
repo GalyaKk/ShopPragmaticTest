@@ -6,11 +6,13 @@ import Utils.WaitTool;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -44,6 +46,18 @@ public class CatalogCategoriesPageTest extends BaseTest{
             e.printStackTrace();
         }
         Assert.assertEquals(CatalogCategoriesPage.getTextFromSuccessMessage(), "Success: You have modified categories!");
+    }
+    @Test
+    public void sortCategoriesByCategoryNameDesc () {
+        loginPageTest.loginAsAdmin();
+        CatalogCategoriesPage.afterLoginGoToCatalogCategoriesPage();
+        List<String> categoriesBeforeList = CatalogCategoriesPage.addAllCategoriesToList();
+        categoriesBeforeList.sort(Comparator.reverseOrder());
+        CatalogCategoriesPage.clickOnCategoryNameButton();
+        WaitTool.waitUntilElementIsClickable(CatalogCategoriesPage.CATEGORY_LIST_FIRST_PAGE);
+        CatalogCategoriesPage.clickOnFirstPageOfCategories();
+        List<String> categoriesAfterSortList = CatalogCategoriesPage.addAllCategoriesToList();
+        Assert.assertEquals(categoriesBeforeList, categoriesAfterSortList);
     }
 
 }
